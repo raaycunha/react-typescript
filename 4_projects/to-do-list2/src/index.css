@@ -1,0 +1,127 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 99vw;
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+  background-color: #fafafa;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem;
+  width: 100%;
+}
+
+.container-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.container-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  background-color: #f0f0f0;
+  border-radius: 5px 5px 0 0;
+  outline: 1px solid black;
+  padding: 1rem;
+  width: 100%;
+  max-width: 30rem;
+}
+
+.form-login {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  outline: 1px solid black;
+  padding: 1rem;
+  width: 100%;
+  max-width: 30rem;
+}
+
+#frm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.box-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.container-tasks {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 30rem;
+}
+
+.box-task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f0f0f0;
+  outline: 1px solid black;
+  border-top: none;
+  padding: 0.6rem;
+}
+
+.box-btn {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.btn-edit {
+  background-color: #070741;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.3rem;
+  transition: .4s;
+  cursor: pointer;
+}
+
+.btn-delete {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.3rem;
+  transition: .4s;
+  cursor: pointer;
+}
+
+.btn-delete:hover,
+.btn-edit:hover {
+  opacity: 0.7;
+  transform: scale(1.03);
+}
+
+.checked {
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+
+.high { border-left: 4px solid red; }
+.medium { border-left: 4px solid orange; }
+.low { border-left: 4px solid green; }
+.high, .medium, .low { transition: .4s; }
+
+.high:hover,
+.medium:hover,
+.low:hover {
+  border-width: 8px;
+}
