@@ -29,7 +29,12 @@ body {
 }
 
 .container-login {
+  font-size: 1.6rem;
   margin: 1rem;
+}
+
+.container-login input {
+  padding: 0.6rem;
 }
 
 .main-container {
