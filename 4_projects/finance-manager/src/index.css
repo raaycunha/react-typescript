@@ -1,0 +1,244 @@
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --primary: #4f46e5;
+  --success: #16a34a;
+  --danger: #dc2626;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  padding-bottom: 3rem;
+}
+
+.header-container {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-container a {
+  color: var(--muted);
+  text-decoration: none;
+  margin-right: 1.5rem;
+  font-weight: 500;
+}
+
+.header-container a:hover {
+  color: var(--primary);
+}
+
+.header-container span {
+  font-weight: 700;
+  background: #eef2ff;
+  color: var(--primary);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+}
+
+.main-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.container-finance {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.finance-summary {
+  display: flex;
+  gap: 1rem;
+}
+
+.box-value {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.box-value h3 {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.box-value span {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.box-value.in span { color: var(--success); }
+.box-value.out span { color: var(--danger); }
+.finance-summary.negative .total span { color: var(--danger); }
+
+.container-graphic {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.graphic-progress {
+  width: 100%;
+  height: 10px;
+  background: var(--border);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.progress-color {
+  height: 100%;
+  width: var(--progress, 0%);
+  background: var(--primary);
+  transition: width 0.3s;
+}
+
+.progress-color.negative { background: var(--danger); }
+.progress-color.positive { background: var(--success); }
+
+.container-form, .preview-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+input, select {
+  display: block;
+  width: 100%;
+  padding: 0.6rem;
+  margin: 0.5rem 0 1rem 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  outline: none;
+}
+
+input:focus, select:focus {
+  border-color: var(--primary);
+}
+
+button {
+  background: var(--primary);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.filter-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.box-select {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.filter-wrapper select {
+  width: auto;
+  margin: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+th, td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+tr.entrada { background: #f0fdf4; }
+tr.saida { background: #fef2f2; }
+
+tr.entrada td:nth-child(3) { 
+  color: var(--success); 
+  font-weight: 600; 
+}
+tr.saida td:nth-child(3) { 
+  color: var(--danger); 
+  font-weight: 600; 
+}
+
+table button {
+  background: transparent;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  padding: 0.3rem 0.6rem;
+}
+
+table button:hover {
+  background: var(--danger);
+  color: white;
+}
+
+.container-toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.box-toast {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
+  background-color: white;
+  font-weight: 500;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px #0000003d;
+}
+
+.box-btn {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.text-color { color: var(--primary); }
