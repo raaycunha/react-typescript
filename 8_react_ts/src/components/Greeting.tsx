@@ -3,10 +3,10 @@ interface GreetingProps {
 }
 const Greeting = ({ name }: GreetingProps) => {
   return (
-    <div>
+    <div className="m-3">
       <h1>Eai {name}!</h1>
     </div>
-  )
-}
+  );
+};
 
-export default Greeting
+export default Greeting;

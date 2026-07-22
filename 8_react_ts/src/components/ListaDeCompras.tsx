@@ -1,26 +1,30 @@
-import { useState } from "react"
-import useLocalStorage from "../hooks/useLocalStorage"
+import { useState } from "react";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const ListaDeCompras = () => {
   const [productList, setProductList] = useLocalStorage<string[]>({
-    key: 'product-list',
+    key: "product-list",
     initialValue: [],
-  })
-  const [product, setProduct] = useState<string>('')
+  });
+  const [product, setProduct] = useState<string>("");
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if (!product.trim()) return
-    setProductList([...productList, product])
-    setProduct('')
-  }
+    e.preventDefault();
+    if (!product.trim()) return;
+    setProductList([...productList, product]);
+    setProduct("");
+  };
   return (
-    <div>
+    <div className="m-3">
       <form onSubmit={handleSubmit}>
-        <input type="text" 
+        <input
+          type="text"
           placeholder="Digite o nome do produto.."
           minLength={1}
           value={product}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setProduct(e.target.value)} />
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setProduct(e.target.value)
+          }
+        />
         <button type="submit">Adicionar Produto</button>
       </form>
       <div className="container-products">
@@ -35,7 +39,7 @@ const ListaDeCompras = () => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ListaDeCompras
+export default ListaDeCompras;
