@@ -1,19 +1,22 @@
-import { useState } from "react";
-import { useAlbum } from "../../hooks/useAlbum";
+import { useEffect, useState } from "react";
+import { useAlbumContext } from "../../contexts/AlbumProvider";
 
 const Header = () => {
-  const { requestApi, error, setError } = useAlbum();
+  const { requestApi, error, setError } = useAlbumContext();
   const [barSearch, setBarSearch] = useState<string>("");
   const [category, setCategory] = useState<string>("nature");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    requestApi("nature");
+  }, []);
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (barSearch.trim().length <= 0) {
       setError(true);
       return;
     }
     setIsLoading(true);
-    requestApi(barSearch);
+    await requestApi(barSearch);
     setTimeout(() => {
       setIsLoading(false);
     }, 500);

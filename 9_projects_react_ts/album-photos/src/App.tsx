@@ -1,9 +1,12 @@
 import "./App.css";
 import Layout from "./components/Layout/Layout";
+import { AlbumContextProvider } from "./contexts/AlbumProvider";
 function App() {
   return (
     <div>
-      <Layout />
+      <AlbumContextProvider>
+        <Layout />
+      </AlbumContextProvider>
     </div>
   );
 }
