@@ -32,4 +32,8 @@ export interface AlbumContextType {
   error: boolean;
   setError: Dispatch<SetStateAction<boolean>>;
   requestApi: (searchUser: string) => Promise<void>;
+  isActive: boolean;
+  imageClick: Photo | null;
+  setImageClick: (value: Photo | null) => void;
+  isLoading: boolean;
 }
