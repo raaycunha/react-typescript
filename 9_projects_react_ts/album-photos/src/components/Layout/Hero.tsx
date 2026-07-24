@@ -3,7 +3,6 @@ import type { Photo } from "../../types/AlbumTypes";
 
 const Hero = () => {
   const { photos } = useAlbumContext();
-  console.log(photos);
   return (
     <div>
       {photos.map((photo: Photo) => (
