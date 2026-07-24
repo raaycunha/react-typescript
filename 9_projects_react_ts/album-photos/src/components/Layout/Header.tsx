@@ -1,17 +1,29 @@
 import { useState } from "react";
+import { useAlbum } from "../../hooks/useAlbum";
 
 const Header = () => {
+  const { requestApi, error, setError } = useAlbum();
   const [barSearch, setBarSearch] = useState<string>("");
-  const [category, setCategory] = useState<string>("all");
-  const [error, setError] = useState<boolean>(false);
-  const handleSubmit = () => {};
+  const [category, setCategory] = useState<string>("nature");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (barSearch.trim().length <= 0) {
+      setError(true);
+      return;
+    }
+    setIsLoading(true);
+    requestApi(barSearch);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+    setBarSearch("");
+  };
   return (
     <div>
       <form onSubmit={handleSubmit}>
         {error && (
-          <span className="text-red-500">
-            Termo de pesquisa ou categoria inválido.
-          </span>
+          <span className="text-red-500">Termo de pesquisa inválido.</span>
         )}
         <input
           type="text"
@@ -26,16 +38,18 @@ const Header = () => {
           required
           minLength={1}
         />
-        <button type="submit">Pesquisar</button>
+        <button disabled={isLoading} type="submit">
+          {isLoading ? "Buscando imagens..." : "Pesquisar"}
+        </button>
       </form>
       <select
         id="selectCategory"
         value={category}
-        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-          setCategory(e.target.value)
-        }
+        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+          setCategory(e.target.value);
+          requestApi(e.target.value);
+        }}
       >
-        <option value="all">Todas as categorias</option>
         <option value="sports">Esportes</option>
         <option value="animals">Animais</option>
         <option value="people">Pessoas</option>
