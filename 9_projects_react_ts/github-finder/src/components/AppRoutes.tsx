@@ -1,12 +1,12 @@
-import { Navigate, Route } from "react-router-dom";
-import { Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { FinderProvider } from "../contexts/FinderProvider";
 import GitHubFinder from "../pages/GitHubFinder";
 import Layout from "../pages/Layout";
 import UserRepo from "../pages/UserRepo";
 
 const AppRoutes = () => {
   return (
-    <div>
+    <FinderProvider>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Navigate to="github-finder" replace />} />
@@ -14,7 +14,7 @@ const AppRoutes = () => {
           <Route path="repos/:username" element={<UserRepo />} />
         </Route>
       </Routes>
-    </div>
+    </FinderProvider>
   );
 };
 
