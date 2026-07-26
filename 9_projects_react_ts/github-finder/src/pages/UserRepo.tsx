@@ -17,6 +17,9 @@ const UserRepo = () => {
     };
     loadRepositories();
   }, [getRepository, username]);
+  const handleSearch = () => {
+    navigate("/github-finder", { replace: true });
+  };
   return (
     <div>
       <h2>
@@ -39,6 +42,7 @@ const UserRepo = () => {
               <Link to={repo.html_url}>Ver código</Link>
             </div>
           ))}
+          <button onClick={handleSearch}>Buscar outro usuário</button>
         </div>
       ) : (
         <div>
