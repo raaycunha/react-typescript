@@ -19,34 +19,26 @@ export const BlogProvider = ({ children }: ChildrenProps) => {
   const navigate = useNavigate();
   const [posts, setPosts] = useState<PostItem[]>([]);
   const [postEdit, setPostEdit] = useState<PostItem | null>(null);
-  const editPost = async (post: PostItem, title: string, body: string) => {
-    if (post.source === "api") {
+  const editPost = async (postEdit: PostItem, title: string, body: string) => {
+    if (postEdit.source === "api") {
       try {
         await axios.put(
-          `https://jsonplaceholder.typicode.com/posts/${post.id}`,
+          `https://jsonplaceholder.typicode.com/posts/${postEdit.id}`,
           {
             title,
             body,
           },
         );
-        setPosts((prevPosts) => {
-          if (prevPosts === null) return prevPosts;
-          return prevPosts.map((postEdit) =>
-            postEdit.id === post.id ? { ...postEdit, title, body } : postEdit,
-          );
-        });
-        setPostEdit(null);
       } catch (err) {
         console.error("ERRO API:", err);
       }
-    } else {
-      setPosts((prevPosts) => {
-        if (prevPosts === null) return prevPosts;
-        return prevPosts.map((postEdit) =>
-          postEdit.id === post.id ? { ...postEdit, title, body } : postEdit,
-        );
-      });
     }
+    setPosts((prevPosts) => {
+      return prevPosts.map((post) =>
+        post.id === postEdit.id ? { ...post, title, body } : post,
+      );
+    });
+    setPostEdit(null);
   };
   const addPost = (title = "", body = "") => {
     if (!title.trim() || !body.trim()) return;
@@ -60,7 +52,7 @@ export const BlogProvider = ({ children }: ChildrenProps) => {
   useEffect(() => {
     let active = true;
 
-    const renderApi = async (): Promise<void> => {
+    const fetchPosts = async (): Promise<void> => {
       const URL = "https://jsonplaceholder.typicode.com/posts";
       try {
         const response = await axios.get<ApiResponsePost[]>(URL);
@@ -83,32 +75,25 @@ export const BlogProvider = ({ children }: ChildrenProps) => {
       }
     };
 
-    renderApi();
+    fetchPosts();
 
     return () => {
       active = false;
     };
   }, []);
-  const handleDelete = async (post: PostItem): Promise<void> => {
-    if (posts === null) return;
-    if (post.source === "api") {
+  const handleDelete = async (postDelete: PostItem): Promise<void> => {
+    if (postDelete.source === "api") {
       try {
         await axios.delete(
-          `https://jsonplaceholder.typicode.com/posts/${post.id}`,
+          `https://jsonplaceholder.typicode.com/posts/${postDelete.id}`,
         );
-        setPosts((prevPosts) => {
-          if (prevPosts === null) return prevPosts;
-          else return prevPosts.filter((post) => post.id !== post.id);
-        });
       } catch (err) {
         console.error("ERRO API:", err);
       }
-    } else {
-      setPosts((currentPosts) => {
-        if (currentPosts === null) return currentPosts;
-        return currentPosts.filter((item) => item.id !== post.id);
-      });
     }
+    setPosts((currentPosts) =>
+      currentPosts.filter((post) => post.id !== postDelete.id),
+    );
   };
   const handleEdit = (item: PostItem) => {
     setPostEdit(item);
